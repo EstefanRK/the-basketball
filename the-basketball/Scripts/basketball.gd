@@ -33,6 +33,6 @@ func _on_body_entered(body: Node) -> void:
 	else:
 		audio_player.stream = ball_hit_floor
 		audio_player.play()
-	audio_player.volume_db -= 5
+	audio_player.volume_db -= 1
 	
 	
