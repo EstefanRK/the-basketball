@@ -38,7 +38,7 @@ height = 0.30091
 
 [node name="Court" type="StaticBody3D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 0
 
 [node name="Basketball_court_noball" parent="." instance=ExtResource("1_ycg7f")]
 

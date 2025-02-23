@@ -17,11 +17,9 @@ func _input(event: InputEvent) -> void:
 		if item_picked_up:
 			ball.pickup()
 		if ray.is_colliding():
-			print("hit")
 			var hit = ray.get_collider()
 			if hit.has_method("pickup"):
 				ball.pickup()
-				print(item_picked_up)
 
 # MOVEMENT
 func _physics_process(delta: float) -> void:
