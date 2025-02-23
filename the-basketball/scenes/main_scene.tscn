@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd33lnxgu8g0l"]
+
+[ext_resource type="PackedScene" uid="uid://b1a4r6ch6xkp1" path="res://assets/basketball-court/source/basketball_court_noball.fbx" id="1_6digv"]
+[ext_resource type="PackedScene" uid="uid://pf27b0ys0fci" path="res://assets/basketball/source/Basketball_dl.blend" id="2_cmfvj"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="basketball_court_noball" parent="." instance=ExtResource("1_6digv")]
+
+[node name="Basketball_dl" parent="." instance=ExtResource("2_cmfvj")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, -10.7645, 2.76919, -0.0840575)
