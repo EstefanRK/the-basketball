@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b1a4r6ch6xkp1"
-path="res://.godot/imported/basketball_court_noball.fbx-28145161a5835e4008b49d47f3dc1d2f.scn"
+path="res://.godot/imported/basketball_court_noball.fbx-109e7ca733aa85aba85c874eaf9fdf40.scn"
 
 [deps]
 
-source_file="res://assets/basketball-court/source/basketball_court_noball.fbx"
-dest_files=["res://.godot/imported/basketball_court_noball.fbx-28145161a5835e4008b49d47f3dc1d2f.scn"]
+source_file="res://Assets/basketball-court/source/basketball_court_noball.fbx"
+dest_files=["res://.godot/imported/basketball_court_noball.fbx-109e7ca733aa85aba85c874eaf9fdf40.scn"]
 
 [params]
 

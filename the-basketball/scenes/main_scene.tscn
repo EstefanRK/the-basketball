@@ -1,11 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd33lnxgu8g0l"]
+[gd_scene load_steps=9 format=3 uid="uid://dd33lnxgu8g0l"]
 
-[ext_resource type="PackedScene" uid="uid://b1a4r6ch6xkp1" path="res://assets/basketball-court/source/basketball_court_noball.fbx" id="1_6digv"]
-[ext_resource type="PackedScene" uid="uid://pf27b0ys0fci" path="res://assets/basketball/source/Basketball_dl.blend" id="2_cmfvj"]
+[ext_resource type="PackedScene" uid="uid://pf27b0ys0fci" path="res://Assets/basketball/source/Basketball_dl.blend" id="2_cmfvj"]
+[ext_resource type="PackedScene" uid="uid://dgdu71ok2stbd" path="res://Scenes/court.tscn" id="3_3ul6d"]
+[ext_resource type="PackedScene" uid="uid://wrixrv72qo27" path="res://Scenes/player.tscn" id="3_gs5fw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k8p6h"]
+sky_top_color = Color(0.372923, 0.440933, 0.535552, 1)
+sky_horizon_color = Color(0.411405, 0.420753, 0.43551, 1)
+sky_cover_modulate = Color(0.408329, 0.408329, 0.408329, 1)
+ground_bottom_color = Color(0.345983, 0.29846, 0.24333, 1)
+ground_horizon_color = Color(0.415203, 0.424595, 0.439423, 1)
+
+[sub_resource type="Sky" id="Sky_e0m02"]
+sky_material = SubResource("ProceduralSkyMaterial_k8p6h")
+
+[sub_resource type="Environment" id="Environment_q21aw"]
+background_mode = 2
+sky = SubResource("Sky_e0m02")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1868
+volumetric_fog_emission = Color(0.533037, 0.533037, 0.533037, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ihvcr"]
+bounce = 0.79
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gaeru"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="basketball_court_noball" parent="." instance=ExtResource("1_6digv")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q21aw")
 
-[node name="Basketball_dl" parent="." instance=ExtResource("2_cmfvj")]
-transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, -10.7645, 2.76919, -0.0840575)
+[node name="Player" parent="." instance=ExtResource("3_gs5fw")]
+transform = Transform3D(0.0144508, 0, 0.999896, 0, 1, 0, -0.999896, 0, 0.0144508, 0.188659, 1.19273, -0.263585)
+
+[node name="Basketball" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.53622, 3.75811, -0.09519)
+physics_material_override = SubResource("PhysicsMaterial_ihvcr")
+gravity_scale = 2.586
+
+[node name="Basketball_dl" parent="Basketball" instance=ExtResource("2_cmfvj")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Basketball"]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0)
+shape = SubResource("SphereShape3D_gaeru")
+
+[node name="Court" parent="." instance=ExtResource("3_3ul6d")]

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bg7uj4adc0wqr"
-path.s3tc="res://.godot/imported/Basket Ball NO_1_0.png-b6a2bb0c6f8a6f65a5517bcd3b3422bc.s3tc.ctex"
+path.s3tc="res://.godot/imported/Basket Ball NO_1_0.png-2ddf6ea5b50dbf1546e452488f2e688d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/basketball-court/source/Basket Ball NO_1_0.png"
-dest_files=["res://.godot/imported/Basket Ball NO_1_0.png-b6a2bb0c6f8a6f65a5517bcd3b3422bc.s3tc.ctex"]
+source_file="res://Assets/basketball-court/source/Basket Ball NO_1_0.png"
+dest_files=["res://.godot/imported/Basket Ball NO_1_0.png-2ddf6ea5b50dbf1546e452488f2e688d.s3tc.ctex"]
 
 [params]
 
