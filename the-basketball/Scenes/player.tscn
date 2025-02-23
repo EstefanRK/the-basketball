@@ -8,6 +8,7 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h4fye"]
 
 [node name="Player" type="CharacterBody3D"]
+collision_mask = 4
 script = ExtResource("1_psmnq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -22,3 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.481681, 0)
 script = ExtResource("2_4yme3")
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Head"]
+transform = Transform3D(1.59, 0, 0, 0, -6.95011e-08, -1.59, 0, 1.59, -6.95011e-08, 0, 0, 0)
+collision_mask = 7
