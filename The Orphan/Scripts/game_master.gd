@@ -1,12 +1,13 @@
 extends Marker3D
 
+@onready var hoop: Node3D = $"../Hoop"
 @onready var hoop_entrance = $"../Hoop/Hoop Entrance"
 @onready var hoop_end = $"../Hoop/Hoop End"
 @onready var ball = $"../Basketball"
 @onready var scream_audio_player = $"../Scream Audio Player"
 @onready var player = $"../Player"
-@onready var hoop_sounds: AudioStreamPlayer3D = $"../Hoop Sounds"
-
+@onready var hoop_sounds: AudioStreamPlayer3D = $"../Hoop/Hoop Sounds"
+@onready var bloody_texts: Node3D = $"../Bloody texts"
 @export var incorrect: AudioStream
 @export var correct: AudioStream
 
@@ -43,14 +44,19 @@ func set_event(num):
 	print("event: "+str(num))
 	if num == 1 && !event_done:
 		scream_audio_player.play()
+		bloody_texts.visible = true
 		event_done = true
+	if num == 2 && !event_done:
+		hoop.rotate_y(deg_to_rad(180))
+		event_done = true
+		
 
 func event_updater():
 	if shots_made == 2:
 		set_event(1)
 	if shots_made == 4:
 		event_done = false
-		# do event 2
+		set_event(2)
 
 ## EVENT 1
 

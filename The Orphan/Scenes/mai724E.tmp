@@ -28,6 +28,25 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.1868
 volumetric_fog_emission = Color(0.533037, 0.533037, 0.533037, 1)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8jl83"]
+load_path = "res://.godot/imported/yourfault.png-b5dfceab1a2472de321a5138c0d42177.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7irac"]
+transparency = 1
+albedo_texture = SubResource("CompressedTexture2D_8jl83")
+
+[sub_resource type="QuadMesh" id="QuadMesh_yvpq3"]
+material = SubResource("StandardMaterial3D_7irac")
+size = Vector2(5.39, 0.775)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_20ixw"]
+transparency = 1
+albedo_texture = ExtResource("10_7u7kx")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8v5g0"]
+material = SubResource("StandardMaterial3D_20ixw")
+size = Vector2(4.23, 1)
+
 [sub_resource type="GDScript" id="GDScript_y0nkg"]
 script/source = "extends Area3D
 
@@ -50,25 +69,6 @@ func _on_body_entered(body: Node3D) -> void:
 [sub_resource type="BoxShape3D" id="BoxShape3D_v2fee"]
 size = Vector3(1.91479, 0.356568, 2.09595)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8jl83"]
-load_path = "res://.godot/imported/yourfault.png-b5dfceab1a2472de321a5138c0d42177.s3tc.ctex"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7irac"]
-transparency = 1
-albedo_texture = SubResource("CompressedTexture2D_8jl83")
-
-[sub_resource type="QuadMesh" id="QuadMesh_yvpq3"]
-material = SubResource("StandardMaterial3D_7irac")
-size = Vector2(5.39, 0.775)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_20ixw"]
-transparency = 1
-albedo_texture = ExtResource("10_7u7kx")
-
-[sub_resource type="QuadMesh" id="QuadMesh_8v5g0"]
-material = SubResource("StandardMaterial3D_20ixw")
-size = Vector2(4.23, 1)
-
 [node name="Node3D" type="Node3D"]
 
 [node name="Game Master" type="Marker3D" parent="."]
@@ -80,34 +80,6 @@ correct = ExtResource("3_o7w03")
 environment = SubResource("Environment_q21aw")
 
 [node name="Court" parent="." instance=ExtResource("3_3ul6d")]
-
-[node name="Hoop" parent="." instance=ExtResource("7_he7fy")]
-
-[node name="Rim area" type="Marker3D" parent="Hoop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
-
-[node name="Hoop Entrance" type="Area3D" parent="Hoop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.88978, 4.76837e-07)
-collision_layer = 3
-collision_mask = 2
-script = SubResource("GDScript_y0nkg")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop/Hoop Entrance"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0814409, 0.447634, 0)
-shape = SubResource("BoxShape3D_qpvui")
-
-[node name="Hoop End" type="Area3D" parent="Hoop"]
-transform = Transform3D(1.42, 0, 0, 0, 1.42, 0, 0, 0, 1.42, -10.8139, 2.41611, 4.76837e-07)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop/Hoop End"]
-transform = Transform3D(0.265, 0, 0, 0, 0.265, 0, 0, 0, 0.265, 0.0869856, -0.0972786, -0.0215765)
-shape = SubResource("BoxShape3D_v2fee")
-
-[node name="Hoop Sounds" type="AudioStreamPlayer3D" parent="Hoop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
-stream = ExtResource("8_d62hk")
 
 [node name="Basketball" parent="." instance=ExtResource("2_3qbpv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11593, 0.285442, 0)
@@ -138,7 +110,38 @@ transform = Transform3D(0.990075, -0.140538, 0, 0.140538, 0.990075, 0, 0, 0, 1, 
 mesh = SubResource("QuadMesh_8v5g0")
 skeleton = NodePath("../MeshInstance3D")
 
-[connection signal="body_entered" from="Hoop/Hoop Entrance" to="Game Master" method="_on_hoop_entrance_body_entered"]
-[connection signal="area_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_area_entered"]
-[connection signal="body_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_body_entered"]
+[node name="Hoop Rotater" type="Marker3D" parent="."]
+
+[node name="Hoop" parent="Hoop Rotater" instance=ExtResource("7_he7fy")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Rim area" type="Marker3D" parent="Hoop Rotater/Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+
+[node name="Hoop Entrance" type="Area3D" parent="Hoop Rotater/Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.88978, 4.76837e-07)
+collision_layer = 3
+collision_mask = 2
+script = SubResource("GDScript_y0nkg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop Rotater/Hoop/Hoop Entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0814409, 0.447634, 0)
+shape = SubResource("BoxShape3D_qpvui")
+
+[node name="Hoop End" type="Area3D" parent="Hoop Rotater/Hoop"]
+transform = Transform3D(1.42, 0, 0, 0, 1.42, 0, 0, 0, 1.42, -10.8139, 2.41611, 4.76837e-07)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop Rotater/Hoop/Hoop End"]
+transform = Transform3D(0.265, 0, 0, 0, 0.265, 0, 0, 0, 0.265, 0.0869856, -0.0972786, -0.0215765)
+shape = SubResource("BoxShape3D_v2fee")
+
+[node name="Hoop Sounds" type="AudioStreamPlayer3D" parent="Hoop Rotater/Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+stream = ExtResource("8_d62hk")
+
 [connection signal="finished" from="Scream Audio Player" to="Game Master" method="_on_scream_audio_player_finished"]
+[connection signal="body_entered" from="Hoop Rotater/Hoop/Hoop Entrance" to="Game Master" method="_on_hoop_entrance_body_entered"]
+[connection signal="area_entered" from="Hoop Rotater/Hoop/Hoop End" to="Game Master" method="_on_hoop_end_area_entered"]
+[connection signal="body_entered" from="Hoop Rotater/Hoop/Hoop End" to="Game Master" method="_on_hoop_end_body_entered"]

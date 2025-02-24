@@ -23,7 +23,11 @@ func _input(event: InputEvent) -> void:
 				ball.pickup()
 	# DEVELOPER TOOLS
 	if event.is_action_pressed("1"):
+		game_master.event_done = false
 		game_master.set_event(1)
+	if event.is_action_pressed("2"):
+		game_master.event_done = false
+		game_master.set_event(2)
 
 ##MOVEMENT
 func _physics_process(delta: float) -> void:
