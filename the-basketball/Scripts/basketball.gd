@@ -2,6 +2,7 @@ extends RigidBody3D
 
 const throw_power = 10.0
 const pickup_sensitivity = 1.5
+@onready var game_master = $"../Game Master"
 @onready var player = $"../Player"
 @onready var audio_player = $AudioStreamPlayer3D
 @onready var rimpos = $"../Rim area".global_position
@@ -33,6 +34,7 @@ func _on_body_entered(body: Node) -> void:
 	else:
 		audio_player.stream = ball_hit_floor
 		audio_player.play()
+		game_master.hoop_entrance_entered = false
+		game_master.hoop_end_entered = false
+		game_master.shot_lock = false
 	audio_player.volume_db -= 1
-	
-	
