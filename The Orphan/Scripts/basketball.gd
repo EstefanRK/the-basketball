@@ -5,10 +5,9 @@ const pickup_sensitivity = 1.5
 @onready var game_master = $"../Game Master"
 @onready var player = $"../Player"
 @onready var audio_player = $AudioStreamPlayer3D
-@onready var rimpos = $"../Rim area".global_position
+@onready var rimpos = $"../Hoop/Rim area".global_position
 @export var ball_hit_floor: AudioStream
 @export var ball_hit_rim: AudioStream
-var pickedup
 
 func _process(delta: float) -> void:
 	if player.item_picked_up:

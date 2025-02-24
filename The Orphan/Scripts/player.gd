@@ -7,6 +7,7 @@ const JUMP_VELOCITY = 4.5
 # VARIABLES
 @onready var ball = $"../Basketball"
 @onready var ray = $Head/RayCast3D
+@onready var game_master = $"../Game Master"
 var item_picked_up = false
 
 #INTERACT
@@ -20,6 +21,10 @@ func _input(event: InputEvent) -> void:
 			var hit = ray.get_collider()
 			if hit.has_method("pickup"):
 				ball.pickup()
+			game_master.event_updater()
+	# DEVELOPER TOOLS
+	if event.is_action_pressed("1"):
+		game_master.set_event(1)
 
 # MOVEMENT
 func _physics_process(delta: float) -> void:
