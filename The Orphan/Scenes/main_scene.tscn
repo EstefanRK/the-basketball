@@ -1,12 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://dd33lnxgu8g0l"]
+[gd_scene load_steps=19 format=3 uid="uid://dd33lnxgu8g0l"]
 
 [ext_resource type="Script" path="res://Scripts/game_master.gd" id="1_ysmm3"]
 [ext_resource type="PackedScene" uid="uid://cll20uoral2qr" path="res://Scenes/basketball.tscn" id="2_3qbpv"]
 [ext_resource type="PackedScene" uid="uid://dgdu71ok2stbd" path="res://Scenes/court.tscn" id="3_3ul6d"]
 [ext_resource type="PackedScene" uid="uid://wrixrv72qo27" path="res://Scenes/player.tscn" id="3_gs5fw"]
+[ext_resource type="AudioStream" uid="uid://d2e2ggqkayec1" path="res://Sounds/Correct Answer Ding Sound Effect.mp3" id="3_o7w03"]
 [ext_resource type="PackedScene" uid="uid://e0okgp5fcqvp" path="res://Scenes/meat_monster.tscn" id="4_11era"]
 [ext_resource type="AudioStream" uid="uid://d1d5pksh3nrwe" path="res://Sounds/scream.mp3" id="6_u2fkx"]
 [ext_resource type="PackedScene" uid="uid://k30xrvg482g2" path="res://Scenes/hoop.tscn" id="7_he7fy"]
+[ext_resource type="AudioStream" uid="uid://pu1eecj4yjav" path="res://Sounds/Error - Sound Effect  Non copyright sound effects  TCW-SoundEffects.mp3" id="8_d62hk"]
+[ext_resource type="Texture2D" uid="uid://c17e1rketqxtc" path="res://Assets/bloody-texts/yourfault.png" id="10_bfwlv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k8p6h"]
 sky_top_color = Color(0.372923, 0.440933, 0.535552, 1)
@@ -47,10 +50,20 @@ func _on_body_entered(body: Node3D) -> void:
 [sub_resource type="BoxShape3D" id="BoxShape3D_v2fee"]
 size = Vector3(1.91479, 0.356568, 2.09595)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7irac"]
+transparency = 1
+albedo_texture = ExtResource("10_bfwlv")
+
+[sub_resource type="QuadMesh" id="QuadMesh_yvpq3"]
+material = SubResource("StandardMaterial3D_7irac")
+size = Vector2(5.39, 0.775)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Game Master" type="Marker3D" parent="."]
 script = ExtResource("1_ysmm3")
+incorrect = ExtResource("8_d62hk")
+correct = ExtResource("3_o7w03")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_q21aw")
@@ -94,6 +107,17 @@ transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, -0.0154419, -4.76837
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4826, 5.2455, -15.8399)
 stream = ExtResource("6_u2fkx")
 unit_size = 5.0
+
+[node name="Hoop Sounds" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+stream = ExtResource("8_d62hk")
+
+[node name="Bloody texts" type="Node3D" parent="."]
+transform = Transform3D(0.994723, 0.102602, 0, -0.102602, 0.994723, 0, 0, 0, 1, -7.51512, 1.48162, -10.1475)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bloody texts"]
+mesh = SubResource("QuadMesh_yvpq3")
+skeleton = NodePath("../..")
 
 [connection signal="body_entered" from="Hoop/Hoop Entrance" to="Game Master" method="_on_hoop_entrance_body_entered"]
 [connection signal="area_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_area_entered"]

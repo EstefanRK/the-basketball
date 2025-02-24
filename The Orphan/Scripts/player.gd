@@ -21,7 +21,6 @@ func _input(event: InputEvent) -> void:
 			var hit = ray.get_collider()
 			if hit.has_method("pickup"):
 				ball.pickup()
-				game_master.event_updater()
 	# DEVELOPER TOOLS
 	if event.is_action_pressed("1"):
 		game_master.set_event(1)
