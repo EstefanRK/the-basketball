@@ -8,15 +8,14 @@ extends Marker3D
 @onready var player = $"../Player"
 @onready var hoop_sounds: AudioStreamPlayer3D = $"../Hoop/Hoop Sounds"
 @onready var bloody_texts: Node3D = $"../Bloody texts"
+@onready var visible_on_screen_notifier_3d: VisibleOnScreenNotifier3D = $"../Hoop/VisibleOnScreenNotifier3D"
 @export var incorrect: AudioStream
 @export var correct: AudioStream
-
 var shots_made = 0
 var shots_cheated = 0
 var hoop_entrance_entered = false
 var hoop_end_entered = false
 var shot_lock = false
-var world_timer = 0
 var event_done = false
 ## HOOP FUNCTIONS
 func _on_hoop_entrance_body_entered(body: Node3D) -> void:
@@ -29,8 +28,9 @@ func _on_hoop_end_body_entered(body: Node3D) -> void:
 		shots_made += 1
 		hoop_sounds.stream = correct
 		hoop_sounds.play()
-		print(shots_made)
+		print(shots_made, event_done)
 		shot_lock = true
+		event_done = false
 	# If player tries to cheat and throw from under.
 	elif !hoop_entrance_entered && body.global_position.y < hoop_end.global_position.y && !shot_lock:
 		print("really?")
@@ -42,23 +42,29 @@ func _on_hoop_end_body_entered(body: Node3D) -> void:
 ## EVENTS
 func set_event(num):
 	print("event: "+str(num))
-	if num == 1 && !event_done:
-		scream_audio_player.play()
-		bloody_texts.visible = true
-		event_done = true
-	if num == 2 && !event_done:
-		hoop.rotate_y(deg_to_rad(180))
-		event_done = true
-		
+	if event_done:  # Prevent multiple events in one frame
+		return
+	match num:
+		1:
+			scream_audio_player.play()
+			bloody_texts.visible = true
+		2:
+			hoop.rotate_y(deg_to_rad(180))
+			visible_on_screen_notifier_3d.visible = true
+
 
 func event_updater():
 	if shots_made == 2:
 		set_event(1)
 	if shots_made == 4:
-		event_done = false
 		set_event(2)
 
 ## EVENT 1
-
 func _on_scream_audio_player_finished() -> void:
 	player.play_sound("")
+
+## EVENT 2
+func _on_visible_on_screen_notifier_3d_screen_entered() -> void:
+	visible_on_screen_notifier_3d.visible = false
+	player.play_sound("")
+	pass # Replace with function body.

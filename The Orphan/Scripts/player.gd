@@ -4,7 +4,7 @@ extends CharacterBody3D
 const SPEED = 2.5
 const JUMP_VELOCITY = 4.5
 
-# VARIABLES
+## VARIABLES
 @onready var ball = $"../Basketball"
 @onready var ray = $Head/RayCast3D
 @onready var game_master = $"../Game Master"
@@ -51,3 +51,8 @@ func _physics_process(delta: float) -> void:
 ##SOUNDS
 func play_sound(name):
 	$"Spooky Sounds".play()
+func ambient_sound(i):
+	if i == true:
+		$Ambience.playing = true
+	elif i == false:
+		$Ambience.playing = false
