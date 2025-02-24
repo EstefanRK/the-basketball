@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csxw43t0vedyu"
+path="res://.godot/imported/(Edited)Tense Horror Ambience (Fast Violin Strike Noise) - Sound Effect for editing.mp3-4fb0dc345699272d4da73e49b658a07c.mp3str"
+
+[deps]
+
+source_file="res://Sounds/(Edited)Tense Horror Ambience (Fast Violin Strike Noise) - Sound Effect for editing.mp3"
+dest_files=["res://.godot/imported/(Edited)Tense Horror Ambience (Fast Violin Strike Noise) - Sound Effect for editing.mp3-4fb0dc345699272d4da73e49b658a07c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

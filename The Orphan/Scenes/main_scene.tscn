@@ -95,9 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4826, 5.2455, -15.8399)
 stream = ExtResource("6_u2fkx")
 unit_size = 5.0
 
-[node name="Timer" type="Timer" parent="Scream Audio Player"]
-
 [connection signal="body_entered" from="Hoop/Hoop Entrance" to="Game Master" method="_on_hoop_entrance_body_entered"]
 [connection signal="area_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_area_entered"]
 [connection signal="body_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_body_entered"]
-[connection signal="timeout" from="Scream Audio Player/Timer" to="Game Master" method="_on_timer_timeout"]
+[connection signal="finished" from="Scream Audio Player" to="Game Master" method="_on_scream_audio_player_finished"]

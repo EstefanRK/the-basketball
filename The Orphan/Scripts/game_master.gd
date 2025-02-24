@@ -4,21 +4,16 @@ extends Marker3D
 @onready var hoop_end = $"../Hoop/Hoop End"
 @onready var ball = $"../Basketball"
 @onready var scream_audio_player = $"../Scream Audio Player"
+@onready var player = $"../Player"
 var shots_made = 0
 var shots_cheated = 0
 var hoop_entrance_entered = false
 var hoop_end_entered = false
 var shot_lock = false
 var world_timer = 0
+var event_done = false
 
-func _process(delta: float) -> void:
-	#world_timer += 1
-	#if fmod(world_timer,10) == 6:
-		#print(shots_made)
-	pass
-
-
-
+## HOOP FUNCTIONS
 func _on_hoop_entrance_body_entered(body: Node3D) -> void:
 	if !shot_lock && body.global_position.y > hoop_entrance.global_position.y:
 		hoop_entrance_entered = true
@@ -34,15 +29,18 @@ func _on_hoop_end_body_entered(body: Node3D) -> void:
 		shots_cheated += 1
 	shot_lock = true
 
+## EVENTS
 func set_event(num):
 	print("event: "+str(num))
 	if num == 1:
 		scream_audio_player.play()
+		event_done = true
 
 func event_updater():
 	if shots_made == 2:
 		set_event(1)
 
+## EVENT 1
 
-func _on_timer_timeout() -> void:
-	pass # Replace with function body.
+func _on_scream_audio_player_finished() -> void:
+	player.play_sound("")

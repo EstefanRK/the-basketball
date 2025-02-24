@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://pu1eecj4yjav"
+path="res://.godot/imported/Error - Sound Effect  Non copyright sound effects  TCW-SoundEffects.mp3-65000d94e199c0a673a34d4d77ac12f3.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Error - Sound Effect  Non copyright sound effects  TCW-SoundEffects.mp3"
+dest_files=["res://.godot/imported/Error - Sound Effect  Non copyright sound effects  TCW-SoundEffects.mp3-65000d94e199c0a673a34d4d77ac12f3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
