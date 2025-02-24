@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://dd33lnxgu8g0l"]
+
+[ext_resource type="Script" path="res://Scripts/game_master.gd" id="1_ysmm3"]
+[ext_resource type="PackedScene" uid="uid://cll20uoral2qr" path="res://Scenes/basketball.tscn" id="2_3qbpv"]
+[ext_resource type="PackedScene" uid="uid://dgdu71ok2stbd" path="res://Scenes/court.tscn" id="3_3ul6d"]
+[ext_resource type="PackedScene" uid="uid://wrixrv72qo27" path="res://Scenes/player.tscn" id="3_gs5fw"]
+[ext_resource type="PackedScene" uid="uid://e0okgp5fcqvp" path="res://Scenes/meat_monster.tscn" id="4_11era"]
+[ext_resource type="Script" path="res://Scenes/hoop_entrance.gd" id="5_maiqy"]
+[ext_resource type="AudioStream" uid="uid://d1d5pksh3nrwe" path="res://Sounds/scream.mp3" id="6_u2fkx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k8p6h"]
+sky_top_color = Color(0.372923, 0.440933, 0.535552, 1)
+sky_horizon_color = Color(0.411405, 0.420753, 0.43551, 1)
+sky_cover_modulate = Color(0.408329, 0.408329, 0.408329, 1)
+ground_bottom_color = Color(0.345983, 0.29846, 0.24333, 1)
+ground_horizon_color = Color(0.415203, 0.424595, 0.439423, 1)
+
+[sub_resource type="Sky" id="Sky_e0m02"]
+sky_material = SubResource("ProceduralSkyMaterial_k8p6h")
+
+[sub_resource type="Environment" id="Environment_q21aw"]
+background_mode = 2
+sky = SubResource("Sky_e0m02")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1868
+volumetric_fog_emission = Color(0.533037, 0.533037, 0.533037, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpvui"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v2fee"]
+size = Vector3(1.91479, 0.773438, 2.09595)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q21aw")
+
+[node name="Game Master" type="Marker3D" parent="."]
+script = ExtResource("1_ysmm3")
+
+[node name="Player" parent="." instance=ExtResource("3_gs5fw")]
+transform = Transform3D(0.0144508, 0, 0.999896, 0, 1, 0, -0.999896, 0, 0.0144508, 0.188659, 1.19273, -0.263585)
+
+[node name="Basketball" parent="." instance=ExtResource("2_3qbpv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11593, 0.285442, 0)
+
+[node name="Court" parent="." instance=ExtResource("3_3ul6d")]
+
+[node name="Hoop Entrance" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.88978, 4.76837e-07)
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("5_maiqy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop Entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0814409, 0.447634, 0)
+shape = SubResource("BoxShape3D_qpvui")
+
+[node name="Hoop End" type="Area3D" parent="."]
+transform = Transform3D(1.42, 0, 0, 0, 1.42, 0, 0, 0, 1.42, -10.8139, 2.41611, 4.76837e-07)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop End"]
+transform = Transform3D(0.265, 0, 0, 0, 0.265, 0, 0, 0, 0.265, 0.0869856, 0.0300196, -0.0215765)
+shape = SubResource("BoxShape3D_v2fee")
+
+[node name="Rim area" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+
+[node name="Meat monster" parent="." instance=ExtResource("4_11era")]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, -0.0154419, -4.76837e-07, -9.24822)
+
+[node name="Scream Audio Player" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4826, 5.2455, -15.8399)
+stream = ExtResource("6_u2fkx")
+
+[connection signal="body_entered" from="Hoop Entrance" to="Game Master" method="_on_hoop_entrance_body_entered"]
+[connection signal="area_entered" from="Hoop End" to="Game Master" method="_on_hoop_end_area_entered"]
+[connection signal="body_entered" from="Hoop End" to="Game Master" method="_on_hoop_end_body_entered"]

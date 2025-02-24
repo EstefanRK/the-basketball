@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://e0okgp5fcqvp"]
+
+[ext_resource type="PackedScene" uid="uid://dlxgtsdqgwfb6" path="res://Assets/meat-monster/source/animated.fbx" id="1_ojmmr"]
+
+[node name="Meat monster" instance=ExtResource("1_ojmmr")]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/rotation = Quaternion(0.0795557, 0, 0, 0.99683)
+bones/2/rotation = Quaternion(0.0971989, -0.000193573, 0.0769753, 0.992284)
+bones/3/rotation = Quaternion(-0.259126, -0.129811, -0.10692, 0.951089)
+bones/4/rotation = Quaternion(0.0500581, -1.18893e-08, 3.72997e-09, 0.998746)
+bones/5/position = Vector3(4.26769e-07, 1.50818, 0.539632)
+bones/5/rotation = Quaternion(-1.42687e-08, -0.0021656, -0.0607663, 0.99815)
+bones/5/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(-0.594352, -0.368364, 0.625188, -0.346689)
+bones/9/rotation = Quaternion(0.48215, 0.00254496, -0.0690976, 0.873356)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/rotation = Quaternion(-0.0213198, -0.0858625, 0.441269, 0.893003)
+bones/11/rotation = Quaternion(0.271641, -0.548049, -0.357846, 0.705549)
+bones/13/rotation = Quaternion(0.565801, -0.414811, 0.588712, 0.401521)
+bones/14/rotation = Quaternion(0.476297, -0.00136193, 0.06923, 0.876554)
+bones/15/rotation = Quaternion(-0.0221064, 0.0917643, -0.442876, 0.891601)
+bones/16/position = Vector3(3.05176e-07, 3.86245, 9.15527e-07)
+bones/18/rotation = Quaternion(-0.000137178, -0.00394962, 0.999384, -0.0348709)
+bones/19/rotation = Quaternion(-0.0411818, 0.000109353, -0.00259206, 0.999148)
+bones/20/rotation = Quaternion(0.52864, 0.0177994, -0.0110883, 0.848587)
+bones/21/rotation = Quaternion(0.260347, -0.0315199, 0.00850395, 0.964963)
+bones/24/rotation = Quaternion(-3.08314e-05, -0.00204552, 0.996415, 0.0845746)
+bones/25/rotation = Quaternion(-0.0398544, -9.57838e-05, 0.00258148, 0.999202)
+bones/26/rotation = Quaternion(0.527898, -0.0177975, 0.0110656, 0.849049)
+bones/27/rotation = Quaternion(0.258344, 0.031748, -0.00849489, 0.965494)
