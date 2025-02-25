@@ -6,10 +6,11 @@ const pickup_sensitivity = 1.5
 @onready var player = $"../Player"
 @onready var audio_player = $AudioStreamPlayer3D
 @onready var rimpos = $"../Hoop/Rim area".global_position
+@onready var hoop: Node3D = $"../Hoop"
 @export var ball_hit_floor: AudioStream
 @export var ball_hit_rim: AudioStream
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player.item_picked_up:
 		var head = player.get_child(1)
 		position = head.global_position
@@ -27,14 +28,15 @@ func pickup():
 		visible = true
 		audio_player.volume_db = 0
 
-func _on_body_entered(body: Node) -> void:
+func _on_body_entered(_body: Node) -> void:
 	if position.distance_to(rimpos) < 1.0:
 		audio_player.stream = ball_hit_rim
 		audio_player.play()
 	else:
 		audio_player.stream = ball_hit_floor
 		audio_player.play()
-		game_master.hoop_entrance_entered = false
-		game_master.hoop_end_entered = false
-		game_master.shot_lock = false
+		hoop.hoop_entrance_entered = false
+		hoop.hoop_end_entered = false
+		hoop.shot_lock = false
 	audio_player.volume_db -= 1
+	#print(rimpos)

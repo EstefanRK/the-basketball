@@ -49,10 +49,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 ##SOUNDS
-func play_sound(name):
+func play_sound(_name):
 	$"Spooky Sounds".play()
 func ambient_sound(i):
-	if i == true:
-		$Ambience.playing = true
-	elif i == false:
-		$Ambience.playing = false
+	match i:
+		true:
+			$Ambience.playing = true
+		false:
+			$Ambience.playing = false

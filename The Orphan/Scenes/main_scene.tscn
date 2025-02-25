@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dd33lnxgu8g0l"]
+[gd_scene load_steps=26 format=3 uid="uid://dd33lnxgu8g0l"]
 
 [ext_resource type="Script" path="res://Scripts/game_master.gd" id="1_ysmm3"]
 [ext_resource type="PackedScene" uid="uid://cll20uoral2qr" path="res://Scenes/basketball.tscn" id="2_3qbpv"]
@@ -30,28 +30,6 @@ sky = SubResource("Sky_e0m02")
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.1868
 volumetric_fog_emission = Color(0.533037, 0.533037, 0.533037, 1)
-
-[sub_resource type="GDScript" id="GDScript_y0nkg"]
-script/source = "extends Area3D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func _on_body_entered(body: Node3D) -> void:
-	print(\"entrance\")
-"
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qpvui"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_v2fee"]
-size = Vector3(1.91479, 0.356568, 2.09595)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8jl83"]
 load_path = "res://.godot/imported/yourfault.png-b5dfceab1a2472de321a5138c0d42177.s3tc.ctex"
@@ -101,36 +79,6 @@ environment = SubResource("Environment_q21aw")
 [node name="Court" parent="." instance=ExtResource("3_3ul6d")]
 
 [node name="Hoop" parent="." instance=ExtResource("7_he7fy")]
-
-[node name="Rim area" type="Marker3D" parent="Hoop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
-
-[node name="Hoop Entrance" type="Area3D" parent="Hoop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.88978, 4.76837e-07)
-collision_layer = 3
-collision_mask = 2
-script = SubResource("GDScript_y0nkg")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop/Hoop Entrance"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0814409, 0.447634, 0)
-shape = SubResource("BoxShape3D_qpvui")
-
-[node name="Hoop End" type="Area3D" parent="Hoop"]
-transform = Transform3D(1.42, 0, 0, 0, 1.42, 0, 0, 0, 1.42, -10.8139, 2.41611, 4.76837e-07)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop/Hoop End"]
-transform = Transform3D(0.265, 0, 0, 0, 0.265, 0, 0, 0, 0.265, 0.0869856, -0.0972786, -0.0215765)
-shape = SubResource("BoxShape3D_v2fee")
-
-[node name="Hoop Sounds" type="AudioStreamPlayer3D" parent="Hoop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
-stream = ExtResource("8_d62hk")
-
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Hoop"]
-transform = Transform3D(1.02, 0, 0, 0, 2.035, 0, 0, 0, 1.02, -11.4682, 2.12959, 0)
-visible = false
 
 [node name="Basketball" parent="." instance=ExtResource("2_3qbpv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11593, 0.285442, 0)
@@ -206,9 +154,4 @@ transform = Transform3D(0.00431091, 0, 0.999991, 0, 1, 0, -0.999991, 0, 0.004310
 [node name="bodybag" parent="bodybag" instance=ExtResource("13_qugtp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.895, 0, 0.006)
 
-[connection signal="body_entered" from="Hoop/Hoop Entrance" to="Game Master" method="_on_hoop_entrance_body_entered"]
-[connection signal="area_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_area_entered"]
-[connection signal="body_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_body_entered"]
-[connection signal="screen_entered" from="Hoop/VisibleOnScreenNotifier3D" to="Game Master" method="_on_visible_on_screen_notifier_3d_screen_entered"]
-[connection signal="screen_exited" from="Hoop/VisibleOnScreenNotifier3D" to="Game Master" method="_on_visible_on_screen_notifier_3d_screen_exited"]
 [connection signal="finished" from="Scream Audio Player" to="Game Master" method="_on_scream_audio_player_finished"]
