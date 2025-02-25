@@ -28,8 +28,8 @@ func pickup():
 		visible = true
 		audio_player.volume_db = 0
 
-func _on_body_entered(_body: Node) -> void:
-	if position.distance_to(rimpos) < 1.0:
+func _on_body_entered(body: Node) -> void:
+	if abs(position.y - rimpos.y) < 2 && body.get_name() == "Hoop":
 		audio_player.stream = ball_hit_rim
 		audio_player.play()
 	else:
