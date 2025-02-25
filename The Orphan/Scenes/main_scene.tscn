@@ -129,7 +129,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-0
 stream = ExtResource("8_d62hk")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Hoop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2926, 1.63124, 0)
+transform = Transform3D(1.02, 0, 0, 0, 2.035, 0, 0, 0, 1.02, -11.4682, 2.12959, 0)
 visible = false
 
 [node name="Basketball" parent="." instance=ExtResource("2_3qbpv")]
@@ -210,4 +210,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.895, 0, 0.006)
 [connection signal="area_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_area_entered"]
 [connection signal="body_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_body_entered"]
 [connection signal="screen_entered" from="Hoop/VisibleOnScreenNotifier3D" to="Game Master" method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="Hoop/VisibleOnScreenNotifier3D" to="Game Master" method="_on_visible_on_screen_notifier_3d_screen_exited"]
 [connection signal="finished" from="Scream Audio Player" to="Game Master" method="_on_scream_audio_player_finished"]

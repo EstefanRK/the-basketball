@@ -49,7 +49,6 @@ func set_event(num):
 			scream_audio_player.play()
 			bloody_texts.visible = true
 		2:
-			hoop.rotate_y(deg_to_rad(180))
 			visible_on_screen_notifier_3d.visible = true
 
 
@@ -64,7 +63,14 @@ func _on_scream_audio_player_finished() -> void:
 	player.play_sound("")
 
 ## EVENT 2
+var location_changed = false
+func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+	if !location_changed:
+		hoop.rotate_y(deg_to_rad(180)) # DOESN'T ROTATE CHILDREN
+		location_changed = true
+	
+	
 func _on_visible_on_screen_notifier_3d_screen_entered() -> void:
-	visible_on_screen_notifier_3d.visible = false
-	player.play_sound("")
-	pass # Replace with function body.
+	if location_changed:
+		visible_on_screen_notifier_3d.visible = false
+		player.play_sound("")
