@@ -8,6 +8,8 @@ const JUMP_VELOCITY = 4.5
 @onready var ball = $"../Basketball"
 @onready var ray = $Head/RayCast3D
 @onready var game_master = $"../Game Master"
+@onready var footstep: AudioStreamPlayer3D = $Footstep
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 var item_picked_up = false
 
 ##INTERACT
@@ -50,12 +52,18 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var footstep_playing
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+	if direction != Vector3() and is_on_floor():
+		animation_player.play("walk")
+	else:
+		animation_player.stop()
 
 	move_and_slide()
 
@@ -68,3 +76,6 @@ func ambient_sound(i):
 			$Ambience.playing = true
 		false:
 			$Ambience.playing = false
+func play_footstep():
+	footstep.pitch_scale = randf_range(.8,1.2)
+	footstep.play()
