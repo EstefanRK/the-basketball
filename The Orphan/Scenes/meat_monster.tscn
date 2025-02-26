@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://d1d5pksh3nrwe" path="res://Sounds/scream.mp3" id="2_qwfun"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w5hhs"]
-size = Vector3(21.1582, 27.8871, 13.2885)
+size = Vector3(21.1582, 27.8871, 59.3123)
 
 [node name="Meat monster" instance=ExtResource("1_ojmmr")]
 transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0, 0)
@@ -55,7 +55,7 @@ aabb = AABB(-0.56411, -1.32153, -0.863881, 1.01201, 2.53174, 0.843973)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23.8655)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dead zone" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81134, 15.2536, -3.845)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81134, 15.2536, 19.1669)
 shape = SubResource("BoxShape3D_w5hhs")
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
