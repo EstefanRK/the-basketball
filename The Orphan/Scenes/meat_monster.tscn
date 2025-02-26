@@ -52,6 +52,7 @@ transform = Transform3D(11.1111, 0, 0, 0, 11.1111, 0, 0, 0, 11.1111, 3.30415, 16
 aabb = AABB(-0.56411, -1.32153, -0.863881, 1.01201, 2.53174, 0.843973)
 
 [node name="Dead zone" type="Area3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23.8655)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dead zone" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81134, 15.2536, -3.845)

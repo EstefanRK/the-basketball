@@ -10,6 +10,8 @@ const JUMP_VELOCITY = 4.5
 @onready var game_master = $"../Game Master"
 @onready var footstep: AudioStreamPlayer3D = $Footstep
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hoop: Node3D = $"../Hoop"
+
 var item_picked_up = false
 
 ##INTERACT
@@ -25,23 +27,24 @@ func _input(event: InputEvent) -> void:
 				ball.pickup()
 	# DEVELOPER TOOLS
 	if event.is_action_pressed("1"):
-		game_master.event_done = false
-		game_master.set_event(1)
-	if event.is_action_pressed("2"):
-		game_master.event_done = false
-		game_master.set_event(2)
-	if event.is_action_pressed("3"):
-		game_master.event_done = false
-		game_master.set_event(3)
-	if event.is_action_pressed("4"):
-		game_master.event_done = false
-		game_master.set_event(4)
-	if event.is_action_pressed("5"):
-		game_master.event_done = false
-		game_master.set_event(5)
-	if event.is_action_pressed("6"):
-		game_master.event_done = false
-		game_master.set_event(6)
+		print(hoop.disabled)
+		#game_master.event_done = false
+		#game_master.set_event(1)
+	#if event.is_action_pressed("2"):
+		#game_master.event_done = false
+		#game_master.set_event(2)
+	#if event.is_action_pressed("3"):
+		#game_master.event_done = false
+		#game_master.set_event(3)
+	#if event.is_action_pressed("4"):
+		#game_master.event_done = false
+		#game_master.set_event(4)
+	#if event.is_action_pressed("5"):
+		#game_master.event_done = false
+		#game_master.set_event(5)
+	#if event.is_action_pressed("6"):
+		#game_master.event_done = false
+		#game_master.set_event(6)
 
 ##MOVEMENT
 func _physics_process(delta: float) -> void:

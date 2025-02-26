@@ -130,10 +130,12 @@ visible = false
 [node name="Hoop Wrong" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
 stream = ExtResource("2_7frsr")
+volume_db = 10.0
 
 [node name="Hoop Correct" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
 stream = ExtResource("3_1ejcm")
+volume_db = -17.0
 
 [connection signal="body_entered" from="Hoop Entrance" to="." method="_on_hoop_entrance_body_entered"]
 [connection signal="body_entered" from="Hoop End" to="." method="_on_hoop_end_body_entered"]

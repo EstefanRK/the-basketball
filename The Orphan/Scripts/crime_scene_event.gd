@@ -13,6 +13,7 @@ extends Node3D
 
 func start_crime_scene_event():
 	trigger_1.visible = true
+	hoop.disabled = true
 var hoop_gone = false
 func _on_trigger_1_screen_entered() -> void:
 	if game_master.event_done:
@@ -28,6 +29,7 @@ func _on_trigger_1_screen_exited() -> void:
 		marker.visible = true
 		marker_2.visible = true	
 	hoop_gone = true
+	
 
 func _on_trigger_2_screen_entered() -> void:
 	if game_master.event_done:
@@ -39,6 +41,8 @@ func _on_trigger_2_screen_entered() -> void:
 
 func _on_trigger_2_screen_exited() -> void:
 	if game_master.event_done:
+		hoop.disabled = false
+		trigger_1.visible = false
 		trigger_2.visible = false
 		bodybag_left.visible = false
 		bodybag_right.visible = false

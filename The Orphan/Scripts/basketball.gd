@@ -28,8 +28,11 @@ func pickup():
 		apply_impulse(basis.z*(-throw_power))
 		visible = true
 		audio_player.volume_db = 0
-
+var first_time = true
 func _on_body_entered(body: Node) -> void:
+	if first_time:
+		first_time = false
+		return
 	if abs(position.y - rimpos.y) < 2 && body.get_name() == "Hoop":
 		audio_player.stream = ball_hit_rim
 		audio_player.play()
@@ -40,4 +43,3 @@ func _on_body_entered(body: Node) -> void:
 		hoop.hoop_end_entered = false
 		hoop.shot_lock = false
 	audio_player.volume_db -= 1
-	#print(rimpos)

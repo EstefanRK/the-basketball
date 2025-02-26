@@ -18,7 +18,7 @@ var event_done = false
 
 ## EVENTS
 func set_event(num):
-	print("event: "+str(num))
+	print("Event number: "+str(num))
 	if event_done:  # Prevent multiple events in one frame
 		return
 	match num:
@@ -26,16 +26,20 @@ func set_event(num):
 			scream_audio_player.play()
 			bloody_texts.visible = true
 			event_done = true
+			hoop.disabled = true
 		2: # Police sirens
 			police_siren.police_siren_event()
 		3: # The teleporting hoop
 			hoop.teleport()
+			hoop.disabled = true
 		4: # The parents spawning
 			crime_scene.start_crime_scene_event()
 		5: # Monster spawn and stands there
 			meat_monster.visible = true
+			hoop.disabled = true
 		6: # Monster kills protagonist
 			meat_monster.final_event = true
+			hoop.disabled = true
 
 
 func event_updater():
@@ -56,5 +60,6 @@ func event_updater():
 ## EVENT 1
 func _on_scream_audio_player_finished() -> void:
 	player.play_sound("")
+	hoop.disabled = false
 	
 ## EVENT 3

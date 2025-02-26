@@ -16,38 +16,27 @@ var shots_cheated = 0
 var hoop_entrance_entered = false
 var hoop_end_entered = false
 var shot_lock = false
-
+var disabled = false
 ## HOOP FUNCTIONS
 func _on_hoop_entrance_body_entered(body: Node3D) -> void:
-	print("yes",shot_lock)
 	if !shot_lock && body.global_position.y > hoop_end.global_position.y:
-		print("yes1")
 		hoop_entrance_entered = true
 
 func _on_hoop_end_body_entered(body: Node3D) -> void:
-	print("no")
-	print(hoop_entrance_entered)
-	print(body.global_position.y)
-	print(hoop_end.global_position.y)
-	print(shot_lock)
 	# Checks if player made a shot and gives one point.
 	if hoop_entrance_entered && body.global_position.y > hoop_end.global_position.y && !shot_lock:
 		if meat_monster.final_event:
-			print("final")
 			hoop_wrong.play()
-			print("FINAL SHOT")
 			shot_lock = true
 			game_master.event_done = false
 		else:
-			print("yes2")
-			shots_made += 1
+			if !disabled:
+				shots_made += 1
+				game_master.event_done = false
 			hoop_correct.play()
-			print(shots_made, game_master.event_done)
 			shot_lock = true
-			game_master.event_done = false
 	# If player tries to cheat and throw from under.
 	elif !hoop_entrance_entered && body.global_position.y < hoop_end.global_position.y && !shot_lock:
-		print("really?")
 		shots_cheated += 1
 		hoop_wrong.play()
 	shot_lock = true
@@ -55,21 +44,19 @@ func _on_hoop_end_body_entered(body: Node3D) -> void:
 ## CHANGE LOCATION EVENT 2
 var location_changed = false
 func teleport():
-	#print("here")
 	visible_on_screen_notifier_3d.visible = true
 
 func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
 	if !location_changed:
-		#print("here2")
 		rotate_y(deg_to_rad(180))
 		rim_area.global_position = rim_area.global_position
 		hoop_entrance.global_position = hoop_entrance.global_position
 		hoop_end.global_position = hoop_end.global_position
-		# Optionally, you can call this on the Area3D nodes to ensure collision is updated
 		hoop_entrance.set_deferred("monitoring", true)
 		hoop_end.set_deferred("monitoring", true)
-		#print("here3")
 		location_changed = true
+		disabled = false
+		game_master.event_done = true
 	
 	
 func _on_visible_on_screen_notifier_3d_screen_entered() -> void:
