@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://k30xrvg482g2"]
+[gd_scene load_steps=13 format=3 uid="uid://k30xrvg482g2"]
 
 [ext_resource type="Script" path="res://Scripts/hoop.gd" id="1_nbhjk"]
 [ext_resource type="PackedScene" uid="uid://ceyaqd35gi7kg" path="res://Assets/Basketball-hoop/hoop.fbx" id="1_slyqm"]
@@ -21,8 +21,6 @@ size = Vector3(0.677734, 0.0731201, 0.230347)
 radius = 0.0306949
 height = 0.30091
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_8v7i5"]
-
 [sub_resource type="GDScript" id="GDScript_61w5h"]
 script/source = "extends Area3D
 
@@ -42,12 +40,8 @@ func _on_body_entered(_body: Node3D) -> void:
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n1675"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_mdhnd"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_4we3c"]
 size = Vector3(1.91479, 1, 2.09595)
-
-[sub_resource type="BoxMesh" id="BoxMesh_6n1ar"]
 
 [node name="Hoop" type="Node3D"]
 script = ExtResource("1_nbhjk")
@@ -112,10 +106,6 @@ shape = SubResource("CapsuleShape3D_lvxoe")
 [node name="Rim area" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Rim area"]
-transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0, 0)
-mesh = SubResource("CylinderMesh_8v7i5")
-
 [node name="Hoop Entrance" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.88978, 4.76837e-07)
 collision_layer = 3
@@ -126,10 +116,6 @@ script = SubResource("GDScript_61w5h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0814409, 0.447634, 0)
 shape = SubResource("BoxShape3D_n1675")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Hoop Entrance/CollisionShape3D"]
-transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0, 0, 0)
-mesh = SubResource("BoxMesh_mdhnd")
-
 [node name="Hoop End" type="Area3D" parent="."]
 transform = Transform3D(1.42, 0, 0, 0, 1.42, 0, 0, 0, 1.42, -10.8139, 2.41611, 4.76837e-07)
 collision_layer = 3
@@ -138,10 +124,6 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop End"]
 transform = Transform3D(0.265, 0, 0, 0, 0.265, 0, 0, 0, 0.265, 0.00660801, -0.112111, -0.0215765)
 shape = SubResource("BoxShape3D_4we3c")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Hoop End"]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
-mesh = SubResource("BoxMesh_6n1ar")
 
 [node name="Hoop Sounds" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
