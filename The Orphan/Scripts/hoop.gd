@@ -49,7 +49,7 @@ func _on_hoop_end_body_entered(body: Node3D) -> void:
 
 ## CHANGE LOCATION EVENT 2
 var location_changed = false
-func event_2():
+func teleport():
 	#print("here")
 	visible_on_screen_notifier_3d.visible = true
 

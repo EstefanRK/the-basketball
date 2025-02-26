@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dd33lnxgu8g0l"]
+[gd_scene load_steps=27 format=3 uid="uid://dd33lnxgu8g0l"]
 
 [ext_resource type="Script" path="res://Scripts/game_master.gd" id="1_ysmm3"]
 [ext_resource type="PackedScene" uid="uid://cll20uoral2qr" path="res://Scenes/basketball.tscn" id="2_3qbpv"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://ddifbmat3gbuh" path="res://Assets/bloody-texts/theyrestillhere.png" id="11_jnd0i"]
 [ext_resource type="Texture2D" uid="uid://dp1qc0lyfsgvs" path="res://Assets/bloody-texts/theyknow.png" id="12_jncw5"]
 [ext_resource type="PackedScene" uid="uid://bqqe1wi2wimde" path="res://Assets/body-bag01/bodybag.glb" id="13_qugtp"]
+[ext_resource type="PackedScene" uid="uid://c5x1icg7fff6s" path="res://Assets/evidence-markers-crime-scene/crime.tscn" id="14_44mnj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k8p6h"]
 sky_top_color = Color(0.372923, 0.440933, 0.535552, 1)
@@ -148,10 +149,16 @@ transform = Transform3D(-0.0015725, -0.180186, -0.983631, 0.00858368, 0.983594, 
 mesh = SubResource("QuadMesh_8v5g0")
 skeleton = NodePath("../MeshInstance3D")
 
-[node name="bodybag" parent="." instance=ExtResource("13_qugtp")]
-transform = Transform3D(0.00431091, 0, 0.999991, 0, 1, 0, -0.999991, 0, 0.00431091, 1.5614, -0.0487253, -0.655169)
+[node name="Crime Scene" parent="." instance=ExtResource("13_qugtp")]
+transform = Transform3D(0.115873, 0, 0.993264, 0, 1, 0, -0.993264, 0, 0.115873, -1.45394, -0.0487253, -0.530536)
 
-[node name="bodybag" parent="bodybag" instance=ExtResource("13_qugtp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.895, 0, 0.006)
+[node name="bodybag" parent="Crime Scene" instance=ExtResource("13_qugtp")]
+transform = Transform3D(0.999836, 0, 0.0181155, 0, 1, 0, -0.0181155, 0, 0.999836, 0.895, 0, 0.00600016)
+
+[node name="crime" parent="Crime Scene" instance=ExtResource("14_44mnj")]
+transform = Transform3D(-0.0181853, 0, -0.0465757, 0, 0.05, 0, 0.0465757, 0, -0.0181853, -0.485436, 0.0545891, 1.14559)
+
+[node name="crime2" parent="Crime Scene/crime" instance=ExtResource("14_44mnj")]
+transform = Transform3D(0.683758, 0, 0.729709, 0, 1, 0, -0.729709, 0, 0.683758, -12.3457, 0, -35.2282)
 
 [connection signal="finished" from="Scream Audio Player" to="Game Master" method="_on_scream_audio_player_finished"]
