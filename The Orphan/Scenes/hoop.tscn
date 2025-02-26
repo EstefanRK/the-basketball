@@ -45,8 +45,6 @@ size = Vector3(1.91479, 1, 2.09595)
 
 [node name="Hoop" type="Node3D"]
 script = ExtResource("1_nbhjk")
-incorrect = ExtResource("2_7frsr")
-correct = ExtResource("3_1ejcm")
 
 [node name="Hoop" type="StaticBody3D" parent="."]
 disable_mode = 1
@@ -125,13 +123,17 @@ collision_mask = 3
 transform = Transform3D(0.265, 0, 0, 0, 0.265, 0, 0, 0, 0.265, 0.00660801, -0.112111, -0.0215765)
 shape = SubResource("BoxShape3D_4we3c")
 
-[node name="Hoop Sounds" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
-stream = ExtResource("2_7frsr")
-
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 transform = Transform3D(1.02, 0, 0, 0, 2.035, 0, 0, 0, 1.02, -11.4682, 2.12959, 0)
 visible = false
+
+[node name="Hoop Wrong" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+stream = ExtResource("2_7frsr")
+
+[node name="Hoop Correct" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+stream = ExtResource("3_1ejcm")
 
 [connection signal="body_entered" from="Hoop Entrance" to="." method="_on_hoop_entrance_body_entered"]
 [connection signal="body_entered" from="Hoop End" to="." method="_on_hoop_end_body_entered"]

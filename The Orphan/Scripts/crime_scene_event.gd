@@ -13,13 +13,10 @@ extends Node3D
 
 func start_crime_scene_event():
 	trigger_1.visible = true
-
 var hoop_gone = false
-var trig1 = false
 func _on_trigger_1_screen_entered() -> void:
 	if game_master.event_done:
 		return
-	var trig1 = true
 func _on_trigger_1_screen_exited() -> void:
 	if game_master.event_done:
 		return

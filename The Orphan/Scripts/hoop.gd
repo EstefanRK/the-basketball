@@ -3,11 +3,11 @@ extends Node3D
 @onready var hoop_entrance: Area3D = $"Hoop Entrance"
 @onready var game_master: Marker3D = $"../Game Master"
 @onready var hoop_end: Area3D = $"Hoop End"
-@onready var hoop_sounds: AudioStreamPlayer3D = $"Hoop Sounds"
+@onready var hoop_correct: AudioStreamPlayer3D = $"Hoop Correct"
+@onready var hoop_wrong: AudioStreamPlayer3D = $"Hoop Wrong"
 @onready var visible_on_screen_notifier_3d: VisibleOnScreenNotifier3D = $VisibleOnScreenNotifier3D
-@export var incorrect: AudioStream
-@export var correct: AudioStream
 @onready var rim_area: Marker3D = $"Rim area"
+@onready var meat_monster: Node3D = $"../Meat monster"
 
 @onready var player: CharacterBody3D = $"../Player"
 
@@ -32,19 +32,24 @@ func _on_hoop_end_body_entered(body: Node3D) -> void:
 	print(shot_lock)
 	# Checks if player made a shot and gives one point.
 	if hoop_entrance_entered && body.global_position.y > hoop_end.global_position.y && !shot_lock:
-		print("yes2")
-		shots_made += 1
-		hoop_sounds.stream = correct
-		hoop_sounds.play()
-		print(shots_made, game_master.event_done)
-		shot_lock = true
-		game_master.event_done = false
+		if meat_monster.final_event:
+			print("final")
+			hoop_wrong.play()
+			print("FINAL SHOT")
+			shot_lock = true
+			game_master.event_done = false
+		else:
+			print("yes2")
+			shots_made += 1
+			hoop_correct.play()
+			print(shots_made, game_master.event_done)
+			shot_lock = true
+			game_master.event_done = false
 	# If player tries to cheat and throw from under.
 	elif !hoop_entrance_entered && body.global_position.y < hoop_end.global_position.y && !shot_lock:
 		print("really?")
 		shots_cheated += 1
-		hoop_sounds.stream = incorrect
-		hoop_sounds.play()
+		hoop_wrong.play()
 	shot_lock = true
 
 ## CHANGE LOCATION EVENT 2

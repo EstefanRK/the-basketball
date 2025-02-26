@@ -132,7 +132,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11593, 0.285442, 0)
 transform = Transform3D(0.0144508, 0, 0.999896, 0, 1, 0, -0.999896, 0, 0.0144508, 0.188659, 1.19273, -0.263585)
 
 [node name="Meat monster" parent="." instance=ExtResource("4_11era")]
-transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, -0.0154419, -4.76837e-07, -9.24822)
+transform = Transform3D(-0.0735729, 0, 0.0518365, 0, 0.09, 0, -0.0518365, 0, -0.0735729, -1.99856, -4.76837e-07, 6.72005)
 visible = false
 
 [node name="Scream Audio Player" type="AudioStreamPlayer3D" parent="."]
