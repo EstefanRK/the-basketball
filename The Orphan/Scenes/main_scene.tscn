@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dd33lnxgu8g0l"]
+[gd_scene load_steps=33 format=3 uid="uid://dd33lnxgu8g0l"]
 
 [ext_resource type="Script" path="res://Scripts/game_master.gd" id="1_ysmm3"]
 [ext_resource type="PackedScene" uid="uid://cll20uoral2qr" path="res://Scenes/basketball.tscn" id="2_3qbpv"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://dp1qc0lyfsgvs" path="res://Assets/bloody-texts/theyknow.png" id="12_jncw5"]
 [ext_resource type="PackedScene" uid="uid://bqqe1wi2wimde" path="res://Assets/body-bag01/bodybag.glb" id="13_qugtp"]
 [ext_resource type="PackedScene" uid="uid://c5x1icg7fff6s" path="res://Assets/evidence-markers-crime-scene/crime.tscn" id="14_44mnj"]
+[ext_resource type="Script" path="res://Scripts/police_siren.gd" id="15_66ut7"]
+[ext_resource type="Script" path="res://Scripts/crime_scene_event.gd" id="15_v5km0"]
+[ext_resource type="AudioStream" uid="uid://bxxkd1q11mhs7" path="res://Sounds/police.mp3" id="16_8frbq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k8p6h"]
 sky_top_color = Color(0.372923, 0.440933, 0.535552, 1)
@@ -66,6 +69,47 @@ albedo_texture = ExtResource("12_jncw5")
 [sub_resource type="QuadMesh" id="QuadMesh_itm6m"]
 material = SubResource("StandardMaterial3D_8nuhq")
 size = Vector2(3.715, 1)
+
+[sub_resource type="Animation" id="Animation_lkrfw"]
+resource_name = "Police_event"
+length = 15.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 10.7667, 1, 3567.78, 0, -162.286)
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_y8inh"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y43ur"]
+_data = {
+"Police_event": SubResource("Animation_lkrfw"),
+"RESET": SubResource("Animation_y8inh")
+}
 
 [node name="Node3D" type="Node3D"]
 
@@ -149,16 +193,50 @@ transform = Transform3D(-0.0015725, -0.180186, -0.983631, 0.00858368, 0.983594, 
 mesh = SubResource("QuadMesh_8v5g0")
 skeleton = NodePath("../MeshInstance3D")
 
-[node name="Crime Scene" parent="." instance=ExtResource("13_qugtp")]
-transform = Transform3D(0.115873, 0, 0.993264, 0, 1, 0, -0.993264, 0, 0.115873, -1.45394, -0.0487253, -0.530536)
+[node name="Police Siren" type="Node3D" parent="."]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, -189.937, 0, -27.0793)
+script = ExtResource("15_66ut7")
 
-[node name="bodybag" parent="Crime Scene" instance=ExtResource("13_qugtp")]
-transform = Transform3D(0.999836, 0, 0.0181155, 0, 1, 0, -0.0181155, 0, 0.999836, 0.895, 0, 0.00600016)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Police Siren"]
+libraries = {
+"": SubResource("AnimationLibrary_y43ur")
+}
 
-[node name="crime" parent="Crime Scene" instance=ExtResource("14_44mnj")]
-transform = Transform3D(-0.0181853, 0, -0.0465757, 0, 0.05, 0, 0.0465757, 0, -0.0181853, -0.485436, 0.0545891, 1.14559)
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Police Siren"]
+transform = Transform3D(11.1111, 0, 0, 0, 11.1111, 0, 0, 0, 11.1111, 0, 0, 0)
+stream = ExtResource("16_8frbq")
+doppler_tracking = 2
 
-[node name="crime2" parent="Crime Scene/crime" instance=ExtResource("14_44mnj")]
-transform = Transform3D(0.683758, 0, 0.729709, 0, 1, 0, -0.729709, 0, 0.683758, -12.3457, 0, -35.2282)
+[node name="Crime Scene" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40288, 0, -0.414806)
+script = ExtResource("15_v5km0")
+
+[node name="Bodybag left" parent="Crime Scene" instance=ExtResource("13_qugtp")]
+transform = Transform3D(0.115873, 0, 0.993264, 0, 1, 0, -0.993264, 0, 0.115873, -4.21446, -0.0487253, 0.424787)
+visible = false
+
+[node name="bodybag right" parent="Crime Scene" instance=ExtResource("13_qugtp")]
+transform = Transform3D(0.0978609, 0, 0.9952, 0, 1, 0, -0.9952, 0, 0.0978609, -4.10479, -0.0487253, -0.463489)
+visible = false
+
+[node name="Trigger1" type="VisibleOnScreenNotifier3D" parent="Crime Scene"]
+transform = Transform3D(-0.00616098, 0, 0.999981, 0, 2.385, 0, -0.999981, 0, -0.00616098, 6.40191, 1.03277, 0.412356)
+visible = false
+
+[node name="Trigger2" type="VisibleOnScreenNotifier3D" parent="Crime Scene"]
+transform = Transform3D(0.115873, 0, 0.993264, 0, 1, 0, -0.993264, 0, 0.115873, -3.95742, -0.347105, 0.00700548)
+visible = false
+
+[node name="marker" parent="Crime Scene" instance=ExtResource("14_44mnj")]
+transform = Transform3D(0.0441547, 0, -0.0234597, 0, 0.05, 0, 0.0234597, 0, 0.0441547, -3.13283, 0.00586376, 1.0397)
+visible = false
+
+[node name="marker2" parent="Crime Scene" instance=ExtResource("14_44mnj")]
+transform = Transform3D(0.0473099, 0, 0.0161794, 0, 0.05, 0, -0.0161794, 0, 0.0473099, -2.85151, 0.00586376, -0.805422)
+visible = false
 
 [connection signal="finished" from="Scream Audio Player" to="Game Master" method="_on_scream_audio_player_finished"]
+[connection signal="screen_entered" from="Crime Scene/Trigger1" to="Crime Scene" method="_on_trigger_1_screen_entered"]
+[connection signal="screen_exited" from="Crime Scene/Trigger1" to="Crime Scene" method="_on_trigger_1_screen_exited"]
+[connection signal="screen_entered" from="Crime Scene/Trigger2" to="Crime Scene" method="_on_trigger_2_screen_entered"]
+[connection signal="screen_exited" from="Crime Scene/Trigger2" to="Crime Scene" method="_on_trigger_2_screen_exited"]

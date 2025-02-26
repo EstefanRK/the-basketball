@@ -11,6 +11,8 @@ extends Marker3D
 @onready var visible_on_screen_notifier_3d: VisibleOnScreenNotifier3D = $"../Hoop/VisibleOnScreenNotifier3D"
 @export var incorrect: AudioStream
 @export var correct: AudioStream
+@onready var police_siren: Node3D = $"../Police Siren"
+@onready var crime_scene: Node3D = $"../Crime Scene"
 
 var event_done = false
 
@@ -25,11 +27,11 @@ func set_event(num):
 			bloody_texts.visible = true
 			event_done = true
 		2: # Police sirens
-			pass
+			police_siren.police_siren_event()
 		3: # The teleporting hoop
 			hoop.teleport()
 		4: # The parents spawning
-			pass
+			crime_scene.start_crime_scene_event()
 		5: # Monster spawn and stands there
 			pass
 		6: # Monster kills protagonist
@@ -41,7 +43,11 @@ func event_updater():
 		2:
 			set_event(1)
 		4:
+			set_event(2)
+		6:
 			set_event(3)
+		8:
+			set_event(4)
 
 ## EVENT 1
 func _on_scream_audio_player_finished() -> void:
