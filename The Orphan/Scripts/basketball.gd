@@ -22,6 +22,7 @@ func pickup():
 		player.item_picked_up = true
 		visible = false
 		game_master.event_updater()
+	# Throw the ball
 	elif player.item_picked_up:
 		player.item_picked_up = false
 		apply_impulse(basis.z*(-throw_power))
