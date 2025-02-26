@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5x1icg7fff6s"]
+
+[ext_resource type="PackedScene" uid="uid://r8ynls6fcmo5" path="res://Assets/evidence-markers-crime-scene/source/crime.fbx" id="1_wnbk6"]
+
+[node name="crime" instance=ExtResource("1_wnbk6")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="Plane" parent="." index="0"]
+transform = Transform3D(-99.9969, 5.93073e-08, -0.785548, 2.77556e-15, 100, 7.54979e-06, 0.785548, 7.54956e-06, -99.9969, 0, 0, 0)
+
+[node name="Plane_001" parent="." index="1"]
+visible = false
+
+[node name="Plane_002" parent="." index="2"]
+visible = false

@@ -1,0 +1,144 @@
+[gd_scene load_steps=13 format=3 uid="uid://k30xrvg482g2"]
+
+[ext_resource type="Script" path="res://Scripts/hoop.gd" id="1_nbhjk"]
+[ext_resource type="PackedScene" uid="uid://ceyaqd35gi7kg" path="res://Assets/Basketball-hoop/hoop.fbx" id="1_slyqm"]
+[ext_resource type="AudioStream" uid="uid://pu1eecj4yjav" path="res://Sounds/Error - Sound Effect  Non copyright sound effects  TCW-SoundEffects.mp3" id="2_7frsr"]
+[ext_resource type="AudioStream" uid="uid://d2e2ggqkayec1" path="res://Sounds/Correct Answer Ding Sound Effect.mp3" id="3_1ejcm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4pu02"]
+size = Vector3(0.101044, 1.11633, 1.51001)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t16j0"]
+size = Vector3(0.167236, 2.52719, 0.164551)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k88jx"]
+size = Vector3(0.180801, 1.17263, 0.143311)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bs1po"]
+size = Vector3(0.677734, 0.0731201, 0.230347)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvxoe"]
+radius = 0.0306949
+height = 0.30091
+
+[sub_resource type="GDScript" id="GDScript_61w5h"]
+script/source = "extends Area3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	pass
+
+func _on_body_entered(_body: Node3D) -> void:
+	print(\"entrance\")
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n1675"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4we3c"]
+size = Vector3(1.91479, 1, 2.09595)
+
+[node name="Hoop" type="Node3D"]
+script = ExtResource("1_nbhjk")
+
+[node name="Hoop" type="StaticBody3D" parent="."]
+disable_mode = 1
+collision_layer = 4
+collision_mask = 3
+
+[node name="Backboard" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3856, 2.8511, 0.00354004)
+shape = SubResource("BoxShape3D_4pu02")
+
+[node name="Pole1" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1673, 1.25969, 0.00512695)
+shape = SubResource("BoxShape3D_t16j0")
+
+[node name="pole2" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(0.732947, 0.680286, 0, -0.680286, 0.732947, 0, 0, 0, 1, -11.8133, 2.93652, 0.000854492)
+shape = SubResource("BoxShape3D_k88jx")
+
+[node name="holdingthing" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4899, 2.6216, 0.0141163)
+shape = SubResource("BoxShape3D_bs1po")
+
+[node name="Hoop" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 0.0784069, 0.996921, 0, -0.996921, 0.0784069, -11.1232, 2.6293, 0.00421321)
+shape = SubResource("CapsuleShape3D_lvxoe")
+
+[node name="Hoop2" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(0.674715, 0.735806, -0.0578705, 2.99445e-09, 0.0784069, 0.996921, 0.738079, -0.672638, 0.0529023, -11.0516, 2.6293, -0.25662)
+shape = SubResource("CapsuleShape3D_lvxoe")
+
+[node name="Hoop3" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(-0.0616235, 0.995027, -0.0782579, 4.80938e-10, 0.0784069, 0.996922, 0.998099, 0.0614338, -0.0048317, -10.7651, 2.6293, -0.410944)
+shape = SubResource("CapsuleShape3D_lvxoe")
+
+[node name="Hoop4" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(-0.665816, 0.745862, 0.0194816, 0.0520267, 0.0203645, 0.998438, 0.7443, 0.66579, -0.0523637, -10.511, 2.6293, -0.329051)
+shape = SubResource("CapsuleShape3D_lvxoe")
+
+[node name="Hoop5" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(-0.994192, 0.107286, -0.00843799, -0.0104026, -0.0177652, 0.999788, 0.107114, 0.99407, 0.0187781, -10.3586, 2.6293, -0.0415445)
+shape = SubResource("CapsuleShape3D_lvxoe")
+
+[node name="Hoop6" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(-0.780882, -0.624383, -0.0192196, -0.0104025, -0.0177652, 0.999788, -0.624592, 0.780917, 0.00737738, -10.4372, 2.6293, 0.220809)
+shape = SubResource("CapsuleShape3D_lvxoe")
+
+[node name="Hoop7" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(-0.0245929, -0.999535, -0.0180166, -0.0104025, -0.0177652, 0.999788, -0.999643, 0.0247752, -0.00996084, -10.7483, 2.6293, 0.361464)
+shape = SubResource("CapsuleShape3D_lvxoe")
+
+[node name="Hoop8" type="CollisionShape3D" parent="Hoop"]
+transform = Transform3D(0.788051, -0.615604, -0.00273918, -0.0104025, -0.0177652, 0.999788, -0.615522, -0.787856, -0.0204038, -11.0363, 2.6293, 0.230748)
+shape = SubResource("CapsuleShape3D_lvxoe")
+
+[node name="hoop" parent="Hoop" instance=ExtResource("1_slyqm")]
+
+[node name="Rim area" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+
+[node name="Hoop Entrance" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.88978, 4.76837e-07)
+collision_layer = 3
+collision_mask = 2
+script = SubResource("GDScript_61w5h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop Entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0814409, 0.447634, 0)
+shape = SubResource("BoxShape3D_n1675")
+
+[node name="Hoop End" type="Area3D" parent="."]
+transform = Transform3D(1.42, 0, 0, 0, 1.42, 0, 0, 0, 1.42, -10.8139, 2.41611, 4.76837e-07)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop End"]
+transform = Transform3D(0.265, 0, 0, 0, 0.265, 0, 0, 0, 0.265, 0.00660801, -0.112111, -0.0215765)
+shape = SubResource("BoxShape3D_4we3c")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1.02, 0, 0, 0, 2.035, 0, 0, 0, 1.02, -11.4682, 2.12959, 0)
+visible = false
+aabb = AABB(-1, -1, -1, 2, 2.585, 2)
+
+[node name="Hoop Wrong" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+stream = ExtResource("2_7frsr")
+volume_db = 10.0
+
+[node name="Hoop Correct" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+stream = ExtResource("3_1ejcm")
+volume_db = -17.0
+
+[connection signal="body_entered" from="Hoop Entrance" to="." method="_on_hoop_entrance_body_entered"]
+[connection signal="body_entered" from="Hoop End" to="." method="_on_hoop_end_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

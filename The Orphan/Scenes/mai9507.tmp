@@ -1,0 +1,204 @@
+[gd_scene load_steps=28 format=3 uid="uid://dd33lnxgu8g0l"]
+
+[ext_resource type="Script" path="res://Scripts/game_master.gd" id="1_ysmm3"]
+[ext_resource type="PackedScene" uid="uid://cll20uoral2qr" path="res://Scenes/basketball.tscn" id="2_3qbpv"]
+[ext_resource type="PackedScene" uid="uid://dgdu71ok2stbd" path="res://Scenes/court.tscn" id="3_3ul6d"]
+[ext_resource type="PackedScene" uid="uid://wrixrv72qo27" path="res://Scenes/player.tscn" id="3_gs5fw"]
+[ext_resource type="AudioStream" uid="uid://d2e2ggqkayec1" path="res://Sounds/Correct Answer Ding Sound Effect.mp3" id="3_o7w03"]
+[ext_resource type="PackedScene" uid="uid://e0okgp5fcqvp" path="res://Scenes/meat_monster.tscn" id="4_11era"]
+[ext_resource type="AudioStream" uid="uid://d1d5pksh3nrwe" path="res://Sounds/scream.mp3" id="6_u2fkx"]
+[ext_resource type="PackedScene" uid="uid://k30xrvg482g2" path="res://Scenes/hoop.tscn" id="7_he7fy"]
+[ext_resource type="AudioStream" uid="uid://pu1eecj4yjav" path="res://Sounds/Error - Sound Effect  Non copyright sound effects  TCW-SoundEffects.mp3" id="8_d62hk"]
+[ext_resource type="Texture2D" uid="uid://ecjkjyhc24g7" path="res://Assets/bloody-texts/murderer.png" id="10_7u7kx"]
+[ext_resource type="Texture2D" uid="uid://ddifbmat3gbuh" path="res://Assets/bloody-texts/theyrestillhere.png" id="11_jnd0i"]
+[ext_resource type="Texture2D" uid="uid://dp1qc0lyfsgvs" path="res://Assets/bloody-texts/theyknow.png" id="12_jncw5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k8p6h"]
+sky_top_color = Color(0.372923, 0.440933, 0.535552, 1)
+sky_horizon_color = Color(0.411405, 0.420753, 0.43551, 1)
+sky_cover_modulate = Color(0.408329, 0.408329, 0.408329, 1)
+ground_bottom_color = Color(0.345983, 0.29846, 0.24333, 1)
+ground_horizon_color = Color(0.415203, 0.424595, 0.439423, 1)
+
+[sub_resource type="Sky" id="Sky_e0m02"]
+sky_material = SubResource("ProceduralSkyMaterial_k8p6h")
+
+[sub_resource type="Environment" id="Environment_q21aw"]
+background_mode = 2
+sky = SubResource("Sky_e0m02")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1868
+volumetric_fog_emission = Color(0.533037, 0.533037, 0.533037, 1)
+
+[sub_resource type="GDScript" id="GDScript_y0nkg"]
+script/source = "extends Area3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func _on_body_entered(body: Node3D) -> void:
+	print(\"entrance\")
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpvui"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v2fee"]
+size = Vector3(1.91479, 0.356568, 2.09595)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8jl83"]
+load_path = "res://.godot/imported/yourfault.png-b5dfceab1a2472de321a5138c0d42177.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7irac"]
+transparency = 1
+albedo_texture = SubResource("CompressedTexture2D_8jl83")
+
+[sub_resource type="QuadMesh" id="QuadMesh_yvpq3"]
+material = SubResource("StandardMaterial3D_7irac")
+size = Vector2(5.39, 0.775)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_20ixw"]
+transparency = 1
+albedo_texture = ExtResource("10_7u7kx")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8v5g0"]
+material = SubResource("StandardMaterial3D_20ixw")
+size = Vector2(4.23, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aedix"]
+transparency = 1
+albedo_texture = ExtResource("11_jnd0i")
+
+[sub_resource type="QuadMesh" id="QuadMesh_nxfyr"]
+material = SubResource("StandardMaterial3D_aedix")
+size = Vector2(5.81, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nuhq"]
+transparency = 1
+albedo_texture = ExtResource("12_jncw5")
+
+[sub_resource type="QuadMesh" id="QuadMesh_itm6m"]
+material = SubResource("StandardMaterial3D_8nuhq")
+size = Vector2(3.715, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Game Master" type="Marker3D" parent="."]
+script = ExtResource("1_ysmm3")
+incorrect = ExtResource("8_d62hk")
+correct = ExtResource("3_o7w03")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q21aw")
+
+[node name="Court" parent="." instance=ExtResource("3_3ul6d")]
+
+[node name="Hoop" parent="." instance=ExtResource("7_he7fy")]
+
+[node name="Rim area" type="Marker3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+
+[node name="Hoop Entrance" type="Area3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.88978, 4.76837e-07)
+collision_layer = 3
+collision_mask = 2
+script = SubResource("GDScript_y0nkg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop/Hoop Entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0814409, 0.447634, 0)
+shape = SubResource("BoxShape3D_qpvui")
+
+[node name="Hoop End" type="Area3D" parent="Hoop"]
+transform = Transform3D(1.42, 0, 0, 0, 1.42, 0, 0, 0, 1.42, -10.8139, 2.41611, 4.76837e-07)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop/Hoop End"]
+transform = Transform3D(0.265, 0, 0, 0, 0.265, 0, 0, 0, 0.265, 0.0869856, -0.0972786, -0.0215765)
+shape = SubResource("BoxShape3D_v2fee")
+
+[node name="Hoop Sounds" type="AudioStreamPlayer3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8139, 2.70851, 4.76837e-07)
+stream = ExtResource("8_d62hk")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8834, 0, 0)
+visible = false
+
+[node name="Basketball" parent="." instance=ExtResource("2_3qbpv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11593, 0.285442, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_gs5fw")]
+transform = Transform3D(0.0144508, 0, 0.999896, 0, 1, 0, -0.999896, 0, 0.0144508, 0.188659, 1.19273, -0.263585)
+
+[node name="Meat monster" parent="." instance=ExtResource("4_11era")]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, -0.0154419, -4.76837e-07, -9.24822)
+visible = false
+
+[node name="Scream Audio Player" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4826, 5.2455, -15.8399)
+stream = ExtResource("6_u2fkx")
+unit_size = 5.0
+
+[node name="Bloody texts" type="Node3D" parent="."]
+transform = Transform3D(0.994723, 0.102602, 0, -0.102602, 0.994723, 0, 0, 0, 1, -7.51512, 1.48162, -10.201)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(0.986768, -0.162138, 0, 0.162138, 0.986768, 0, 0, 0, 1, -2.8171, -0.115968, 9.53674e-07)
+mesh = SubResource("QuadMesh_yvpq3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(0.983631, -0.180193, 0, 0.180193, 0.983631, 0, 0, 0, 1, 3.94658, 0.359818, -9.53674e-07)
+mesh = SubResource("QuadMesh_8v5g0")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(0.998959, -0.0456071, 0, 0.0456071, 0.998959, 0, 0, 0, 1, 11.0416, 1.15413, -9.53674e-07)
+mesh = SubResource("QuadMesh_nxfyr")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(-4.32776e-08, -0.140538, 0.990075, -6.14313e-09, 0.990075, 0.140538, -1, 0, -4.37114e-08, -9.3593, -0.491926, 2.49945)
+mesh = SubResource("QuadMesh_itm6m")
+skeleton = NodePath("../MeshInstance3D3")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(-0.00655506, -0.140329, 0.990083, 0.0635507, 0.988044, 0.140461, -0.997957, 0.0638412, 0.00244131, -9.31055, -0.964509, 21.4792)
+mesh = SubResource("QuadMesh_nxfyr")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(0.00789111, -0.140235, 0.990087, -0.0765045, 0.987131, 0.140426, -0.997038, -0.0768543, -0.00293903, -9.35523, -0.53135, 9.86984)
+mesh = SubResource("QuadMesh_8v5g0")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(-0.00166699, -0.140525, -0.990075, 0.0161626, 0.989944, -0.140533, 0.999868, -0.0162364, 0.000621011, 21.8193, 2.28053, 9.91848)
+mesh = SubResource("QuadMesh_itm6m")
+skeleton = NodePath("../MeshInstance3D3")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(-0.986768, -0.162138, -8.6266e-08, -0.162138, 0.986768, -1.41745e-08, 8.74228e-08, 0, -1, 14.007, 1.61938, 28.5866)
+mesh = SubResource("QuadMesh_yvpq3")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(-0.998495, -0.0548456, -8.72912e-08, -0.0548456, 0.998495, -4.79476e-09, 8.74228e-08, 0, -1, -0.556859, -0.0578758, 28.6764)
+mesh = SubResource("QuadMesh_8v5g0")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Bloody texts"]
+transform = Transform3D(-0.0015725, -0.180186, -0.983631, 0.00858368, 0.983594, -0.180193, 0.999962, -0.00872653, -4.37114e-08, 21.8124, 2.51338, 19.2123)
+mesh = SubResource("QuadMesh_8v5g0")
+skeleton = NodePath("../MeshInstance3D")
+
+[connection signal="body_entered" from="Hoop/Hoop Entrance" to="Game Master" method="_on_hoop_entrance_body_entered"]
+[connection signal="area_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_area_entered"]
+[connection signal="body_entered" from="Hoop/Hoop End" to="Game Master" method="_on_hoop_end_body_entered"]
+[connection signal="finished" from="Scream Audio Player" to="Game Master" method="_on_scream_audio_player_finished"]
