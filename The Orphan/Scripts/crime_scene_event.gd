@@ -35,7 +35,7 @@ func _on_trigger_2_screen_entered() -> void:
 	if game_master.event_done:
 		return
 	hoop.visible = true
-	player.play_sound("name")
+	player.play_sound("spooky")
 	game_master.event_done = true
 
 

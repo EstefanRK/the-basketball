@@ -62,5 +62,5 @@ func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
 func _on_visible_on_screen_notifier_3d_screen_entered() -> void:
 	if location_changed:
 		visible_on_screen_notifier_3d.visible = false
-		player.play_sound("")
+		player.play_sound("spooky")
 		game_master.event_done = true

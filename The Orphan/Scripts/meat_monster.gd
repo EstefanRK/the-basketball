@@ -17,9 +17,10 @@ func _process(delta: float) -> void:
 		global_translate(direction * 80 * delta)  # Apply movement
 		animation_player.play("Armature|run")
 func _on_visible_on_screen_notifier_3d_screen_entered() -> void:
+	if !first_seen:
+		player.play_sound("bass")
 	first_seen = true
 	hoop.disabled = false
-	final_seen = false
 	if final_event:
 		audio_stream_player_3d.play()
 		final_seen = true
@@ -28,3 +29,6 @@ func _on_dead_zone_body_entered(body: Node3D) -> void:
 	if final_seen == true:
 		if body.get_name() == "Player":
 			get_tree().change_scene_to_file("res://Scenes/end_scene.tscn")
+
+func play_breathe():
+	$Breathe.play()

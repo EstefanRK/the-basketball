@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://wrixrv72qo27"]
+[gd_scene load_steps=11 format=3 uid="uid://wrixrv72qo27"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_psmnq"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="2_4yme3"]
 [ext_resource type="AudioStream" uid="uid://c70r7km63ug8b" path="res://Sounds/ambience spooky.mp3" id="3_amh1q"]
 [ext_resource type="AudioStream" uid="uid://csxw43t0vedyu" path="res://Sounds/(Edited)Tense Horror Ambience (Fast Violin Strike Noise) - Sound Effect for editing.mp3" id="4_o7dlt"]
 [ext_resource type="AudioStream" uid="uid://bmvjy6vj0s6w3" path="res://Sounds/footstep.mp3" id="5_s0rjy"]
+[ext_resource type="AudioStream" uid="uid://cyemcmtu5lxs6" path="res://Sounds/bassnote.mp3" id="7_lbxbk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i428v"]
 
@@ -72,3 +73,8 @@ volume_db = -20.0
 libraries = {
 "": SubResource("AnimationLibrary_taw4c")
 }
+
+[node name="Bass" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65917, 0)
+stream = ExtResource("7_lbxbk")
+volume_db = -20.0

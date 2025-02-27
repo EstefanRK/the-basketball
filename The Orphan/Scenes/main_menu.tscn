@@ -42,4 +42,64 @@ grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_efr78")
 text = "Start Game"
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = 75.0
+offset_right = 35.0
+offset_bottom = 98.0
+grow_horizontal = 2
+text = "Controls:"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.5
+offset_top = 35.5
+offset_right = 97.5
+offset_bottom = 84.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "WASD = Move
+Left click = Throw, Pickup
+"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = 449.0
+offset_right = 35.0
+offset_bottom = 472.0
+grow_horizontal = 2
+text = "Note"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Label2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.5
+offset_top = 35.5
+offset_right = 97.5
+offset_bottom = 84.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Set to fullscreen 
+before starting the game.
+"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

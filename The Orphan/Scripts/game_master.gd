@@ -37,6 +37,7 @@ func set_event(num):
 		5: # Monster spawn and stands there
 			meat_monster.visible = true
 			hoop.disabled = true
+			meat_monster.play_breathe()
 		6: # Monster kills protagonist
 			meat_monster.final_event = true
 			hoop.disabled = true
@@ -59,7 +60,7 @@ func event_updater():
 
 ## EVENT 1
 func _on_scream_audio_player_finished() -> void:
-	player.play_sound("")
+	player.play_sound("spooky")
 	hoop.disabled = false
 	
 ## EVENT 3

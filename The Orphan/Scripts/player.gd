@@ -27,24 +27,23 @@ func _input(event: InputEvent) -> void:
 				ball.pickup()
 	# DEVELOPER TOOLS
 	if event.is_action_pressed("1"):
-		print(hoop.disabled)
-		#game_master.event_done = false
-		#game_master.set_event(1)
-	#if event.is_action_pressed("2"):
-		#game_master.event_done = false
-		#game_master.set_event(2)
-	#if event.is_action_pressed("3"):
-		#game_master.event_done = false
-		#game_master.set_event(3)
-	#if event.is_action_pressed("4"):
-		#game_master.event_done = false
-		#game_master.set_event(4)
-	#if event.is_action_pressed("5"):
-		#game_master.event_done = false
-		#game_master.set_event(5)
-	#if event.is_action_pressed("6"):
-		#game_master.event_done = false
-		#game_master.set_event(6)
+		game_master.event_done = false
+		game_master.set_event(1)
+	if event.is_action_pressed("2"):
+		game_master.event_done = false
+		game_master.set_event(2)
+	if event.is_action_pressed("3"):
+		game_master.event_done = false
+		game_master.set_event(3)
+	if event.is_action_pressed("4"):
+		game_master.event_done = false
+		game_master.set_event(4)
+	if event.is_action_pressed("5"):
+		game_master.event_done = false
+		game_master.set_event(5)
+	if event.is_action_pressed("6"):
+		game_master.event_done = false
+		game_master.set_event(6)
 
 ##MOVEMENT
 func _physics_process(delta: float) -> void:
@@ -70,8 +69,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 ##SOUNDS
-func play_sound(_name):
-	$"Spooky Sounds".play()
+func play_sound(name):
+	match name:
+		"spooky":
+			$"Spooky Sounds".play()
+		"bass":
+			$"Bass".play()
 func ambient_sound(i):
 	match i:
 		true:
