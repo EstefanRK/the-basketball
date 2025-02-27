@@ -41,21 +41,22 @@ func set_event(num):
 		6: # Monster kills protagonist
 			meat_monster.final_event = true
 			hoop.disabled = true
+			player.stop_ambience()
 
 
 func event_updater():
 	match hoop.shots_made:
 		2:
 			set_event(1)
-		4:
+		5:
 			set_event(2)
-		6:
+		9:
 			set_event(3)
-		8:
+		13:
 			set_event(4)
-		10:
+		16:
 			set_event(5)
-		12:
+		19:
 			set_event(6)
 
 ## EVENT 1
