@@ -59,6 +59,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -97,3 +98,4 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_c385a")
+volume_db = 5.0
